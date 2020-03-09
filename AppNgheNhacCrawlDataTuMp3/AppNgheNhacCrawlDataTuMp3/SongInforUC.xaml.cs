@@ -16,13 +16,28 @@ using System.Windows.Shapes;
 namespace AppNgheNhacCrawlDataTuMp3
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SongInforUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SongInforUC : UserControl
     {
-        public MainWindow()
+        public SongInforUC()
         {
             InitializeComponent();
+        }
+
+        private event EventHandler backToMain;
+        public event EventHandler BackToMain
+        {
+            add { backToMain += value; }
+            remove { backToMain -= value; }
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (backToMain != null)
+            {
+                backToMain(this, new EventArgs());
+            }
         }
     }
 }
