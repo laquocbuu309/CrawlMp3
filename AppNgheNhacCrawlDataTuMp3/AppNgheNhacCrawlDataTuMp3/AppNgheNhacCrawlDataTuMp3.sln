@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppNgheNhacCrawlDataTuMp3", "AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3.csproj", "{6180DBDA-75F2-4B7D-82DD-2F5E16B977D1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6180DBDA-75F2-4B7D-82DD-2F5E16B977D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6180DBDA-75F2-4B7D-82DD-2F5E16B977D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6180DBDA-75F2-4B7D-82DD-2F5E16B977D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6180DBDA-75F2-4B7D-82DD-2F5E16B977D1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F1AE0B7-3CE5-44A0-95EC-877BF83A4D57}
+	EndGlobalSection
+EndGlobal
