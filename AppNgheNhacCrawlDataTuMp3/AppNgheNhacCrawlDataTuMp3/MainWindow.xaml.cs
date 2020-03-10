@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -83,9 +84,40 @@ namespace AppNgheNhacCrawlDataTuMp3
 
                 int startIndexURL = dataSong.IndexOf("href=\"");
                 int endIndexURL = dataSong.IndexOf(".html");
-                string songURL = dataSong.Substring(startIndexURL, endIndexURL - startIndexURL).Replace("href=\"","");
+                string songURL = dataSong.Substring(startIndexURL, endIndexURL - startIndexURL+5).Replace("href=\"","");
 
-                listSong.Add(new Song() { STT = i + 1, SongName = song, SingerName = singer, SongURL = songURL, DownloadURL = "" });
+                HttpRequest http = new HttpRequest();
+                string htmlSourceSong = http.Get(@"https://mp3.zing.vn" + songURL + @"?play_song=1").ToString().Replace("<br>", "");
+
+                var lydric = Regex.Match(htmlSourceSong, @"<p class=""fn-wlyrics fn-content""(.*?)</p>",RegexOptions.Singleline);
+                string tempLydric = "Chưa Có Lydric";
+                if (lydric != null)
+                {
+                    tempLydric = Regex.Match(lydric.ToString(), @""">(.*?)</p>", RegexOptions.Singleline).ToString();
+                    tempLydric = tempLydric.Replace(@""">", "").Replace("</p>", "");
+                }
+
+                string getJsonURL = Regex.Match(htmlSourceSong, @"<div id=""zplayerjs-wrapper"" class=""player mt0"" data-xml=""(.*?)""", RegexOptions.Singleline).ToString().Replace(@"<div id=""zplayerjs-wrapper"" class=""player mt0"" data-xml=""", "").Replace(@"""", "");
+                string jSonInfo = http.Get(@"https://mp3.zing.vn/xhr" + getJsonURL).ToString();
+
+                JObject jObject = JObject.Parse(jSonInfo);
+                string downLoadURL;
+
+                try
+                {
+                    downLoadURL = "http:" + jObject["data"]["source"]["128"].ToString();
+                }
+                catch (Exception)
+                {
+
+                    downLoadURL = "http:" + jObject["data"]["source"].ToString();
+                }
+                
+                string photoURL = jObject["data"]["thumbnail"].ToString();
+
+                string savePath = AppDomain.CurrentDomain.BaseDirectory + "Song\\" + song + ".mp3";
+
+                listSong.Add(new Song() { STT = i + 1, SongName = song, SingerName = singer, SongURL = songURL, DownloadURL = downLoadURL, Lydric = tempLydric, PhotoURL = photoURL, SavePath = savePath });
             }
         }
         private void UcSongInfo_BackToMain(object sender, EventArgs e)
@@ -96,7 +128,8 @@ namespace AppNgheNhacCrawlDataTuMp3
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
-
+            Song song = (sender as Button).DataContext as Song;
+            ucSongInfo.SongInfo = song;
             GridTop10.Visibility = Visibility.Hidden;
             ucSongInfo.Visibility = Visibility.Visible;
         }

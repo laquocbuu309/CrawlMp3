@@ -16,10 +16,27 @@
             <Button x:Name="btnBack" Click="btnBack_Click">Back</Button>
         </Grid>
         <Grid Grid.Row="1">
-            <Button>Play Song</Button>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Height="0" Width="0">
+                <MediaElement x:Name="mdAudio" Source="{Binding SavePath}" MediaOpened="MdAudio_MediaOpened"></MediaElement>
+            </Grid>
+            <Grid Grid.Row="1">
+                <Image Source="{Binding PhotoURL}"></Image>
+            </Grid>
+            <Grid Grid.Row="2">
+                <Slider x:Name="sdDuration" PreviewMouseDown="SdDuration_PreviewMouseDown"  PreviewMouseUp="SdDuration_PreviewMouseUp" HorizontalAlignment="Stretch" ValueChanged="SdDuration_ValueChanged"></Slider>
+            </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <TextBlock>Lydric</TextBlock>
+            <Border BorderThickness="1" BorderBrush="Red">
+                <ScrollViewer>
+                    <TextBlock Text="{Binding Lydric}"></TextBlock>
+                </ScrollViewer>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>
