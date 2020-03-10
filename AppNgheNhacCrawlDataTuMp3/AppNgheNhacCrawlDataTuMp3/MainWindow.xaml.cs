@@ -31,6 +31,7 @@ namespace AppNgheNhacCrawlDataTuMp3
         private List<Song> listBXHVN;
         private List<Song> listBXHEU;
         private List<Song> listBXHKO;
+        private Song currentSong;
         public bool IsCheckVN { get => isCheckVN; set { isCheckVN = value; lsbTopSong.ItemsSource = listBXHVN; isCheckEU = false; isCheckKO = false; OnPropertyChanged("IsCheckVN"); OnPropertyChanged("IsCheckEU"); OnPropertyChanged("IsCheckKO"); } }
         public bool IsCheckEU { get => isCheckEU; set { isCheckEU = value; lsbTopSong.ItemsSource = listBXHEU; isCheckVN = false; isCheckKO = false; OnPropertyChanged("IsCheckVN"); OnPropertyChanged("IsCheckEU"); OnPropertyChanged("IsCheckKO"); } }
         public bool IsCheckKO { get => isCheckKO; set { isCheckKO = value; lsbTopSong.ItemsSource = listBXHKO; isCheckEU = false; isCheckVN = false; OnPropertyChanged("IsCheckVN"); OnPropertyChanged("IsCheckEU"); OnPropertyChanged("IsCheckKO"); } }
@@ -38,6 +39,7 @@ namespace AppNgheNhacCrawlDataTuMp3
         public List<Song> ListBXHVN { get => listBXHVN; set => listBXHVN = value; }
         public List<Song> ListBXHEU { get => listBXHEU; set => listBXHEU = value; }
         public List<Song> ListBXHKO { get => listBXHKO; set => listBXHKO = value; }
+        public Song CurrentSong { get => currentSong; set => currentSong = value; }
 
         public MainWindow()
         {
@@ -130,6 +132,7 @@ namespace AppNgheNhacCrawlDataTuMp3
         {
             Song song = (sender as Button).DataContext as Song;
             ucSongInfo.SongInfo = song;
+            CurrentSong = song;
             GridTop10.Visibility = Visibility.Hidden;
             ucSongInfo.Visibility = Visibility.Visible;
         }
@@ -140,6 +143,49 @@ namespace AppNgheNhacCrawlDataTuMp3
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(newName));
+            }
+        }
+
+        void ChangeToNextOrPreviousSong(List<Song> listSong, int limitPosition, int addCount)
+        {
+            int indexCurrentSong = listSong.IndexOf(CurrentSong);
+            if (indexCurrentSong == limitPosition)
+                return;
+            else
+            {
+                CurrentSong = listSong[indexCurrentSong + addCount];
+                ucSongInfo.SongInfo = CurrentSong;
+            }
+        }
+        private void ucSongInfo_PreviousClicked(object sender, EventArgs e)
+        {
+            if (IsCheckVN)
+            {
+                ChangeToNextOrPreviousSong(ListBXHVN, 0, -1);
+            }
+            else if (IsCheckEU)
+            {
+                ChangeToNextOrPreviousSong(ListBXHEU, 0, -1);
+            }
+            else
+            {
+                ChangeToNextOrPreviousSong(ListBXHKO, 0, -1);
+            }
+        }
+
+        private void ucSongInfo_NextClicked(object sender, EventArgs e)
+        {
+            if (IsCheckVN)
+            {
+                ChangeToNextOrPreviousSong(ListBXHVN, 9, +1);
+            }
+            else if (IsCheckEU)
+            {
+                ChangeToNextOrPreviousSong(ListBXHEU, 9, +1);
+            }
+            else
+            {
+                ChangeToNextOrPreviousSong(ListBXHKO, 9, +1);
             }
         }
     }

@@ -39,3 +39,5 @@ D:\C#\Project\CrawlMp3\AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3\obj\D
 D:\C#\Project\CrawlMp3\AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3\obj\Debug\AppNgheNhacCrawlDataTuMp3.pdb
 D:\C#\Project\CrawlMp3\AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3\bin\Debug\Newtonsoft.Json.dll
 D:\C#\Project\CrawlMp3\AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3\bin\Debug\Newtonsoft.Json.xml
+C:\Users\T7810\Documents\GitHub\Crawl\AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3\bin\Debug\Newtonsoft.Json.dll
+C:\Users\T7810\Documents\GitHub\Crawl\AppNgheNhacCrawlDataTuMp3\AppNgheNhacCrawlDataTuMp3\bin\Debug\Newtonsoft.Json.xml

@@ -76,6 +76,6 @@
                 </ListBox>
             </Grid>
         </Grid>
-        <uc:SongInforUC x:Name="ucSongInfo" Visibility="Hidden"></uc:SongInforUC>
+        <uc:SongInforUC x:Name="ucSongInfo" Visibility="Hidden" PreviousClicked="ucSongInfo_PreviousClicked" NextClicked="ucSongInfo_NextClicked"></uc:SongInforUC>
     </Grid>
 </Window>

@@ -22,17 +22,58 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid Height="0" Width="0">
-                <MediaElement x:Name="mdAudio" Source="{Binding SavePath}" MediaOpened="MdAudio_MediaOpened"></MediaElement>
+                <MediaElement x:Name="mdAudio" LoadedBehavior="Manual" Source="{Binding SavePath}" MediaOpened="MdAudio_MediaOpened"></MediaElement>
             </Grid>
             <Grid Grid.Row="1">
                 <Image Source="{Binding PhotoURL}"></Image>
             </Grid>
-            <Grid Grid.Row="2">
-                <Slider x:Name="sdDuration" PreviewMouseDown="SdDuration_PreviewMouseDown"  PreviewMouseUp="SdDuration_PreviewMouseUp" HorizontalAlignment="Stretch" ValueChanged="SdDuration_ValueChanged"></Slider>
+            <Grid Grid.Row="2" Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Width="60">
+                        <Button x:Name="btnPlayAndPause" Click="btnPlayAndPause_Click">Play</Button>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Button x:Name="btnPrevious" Click="btnPrevious_Click">Previous</Button>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Button x:Name="btnNext" Click="btnNext_Click">Next</Button>
+                    </Grid>
+                    <Grid Grid.Column="3">
+                        <ToggleButton Click="ToggleButton_Click">1.0</ToggleButton>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="40"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <TextBlock x:Name="txbPosition">00:00</TextBlock>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Slider VerticalAlignment="Center" x:Name="sdDuration" PreviewMouseDown="SdDuration_PreviewMouseDown"  PreviewMouseUp="SdDuration_PreviewMouseUp" HorizontalAlignment="Stretch" ValueChanged="SdDuration_ValueChanged"></Slider>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <TextBlock x:Name="txbDuration">00:00</TextBlock>
+                    </Grid>
+                </Grid>
+                
+                
             </Grid>
         </Grid>
         <Grid Grid.Row="2">
-            <Border BorderThickness="1" BorderBrush="Red">
+            <Border BorderThickness="1" BorderBrush="Black">
                 <ScrollViewer>
                     <TextBlock Text="{Binding Lydric}"></TextBlock>
                 </ScrollViewer>
